@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import NavbarHome from "../components/NavbarHome";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Modal from "@wodenp98/plugin-modal-react";
+import { states } from "../data/states";
 
 const options = [
   { value: "sales", label: "Sales" },
@@ -13,7 +15,11 @@ const options = [
 
 const Home = () => {
   const [selectedOption, setSelectedOption] = useState(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
+  const toggleModal = () => {
+    setModalIsOpen(!modalIsOpen);
+  };
   return (
     <>
       <NavbarHome />
@@ -48,7 +54,16 @@ const Home = () => {
               <input id="city" type="text" />
 
               <label for="state">State</label>
-              <select name="state" id="state"></select>
+              <select
+                value={selectedOption}
+                onChange={(event) => setSelectedOption(event.target.value)}
+              >
+                {states.map((state) => (
+                  <option key={state.value} value={state.value}>
+                    {state.label}
+                  </option>
+                ))}
+              </select>
 
               <label for="zip-code">Zip Code</label>
               <input id="zip-code" type="number" />
@@ -64,6 +79,16 @@ const Home = () => {
                 </option>
               ))}
             </select>
+
+            <div className="modal-btn" onClick={toggleModal}>
+              Open modal
+            </div>
+
+            {modalIsOpen && (
+              <Modal toggle={toggleModal}>
+                <h1>Employee Created!</h1>
+              </Modal>
+            )}
           </form>
         </div>
       </div>
