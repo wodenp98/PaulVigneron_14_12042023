@@ -236,3 +236,11 @@ export const states = [
     abbreviation: "WY",
   },
 ];
+
+export const departments = [
+  { value: "sales", name: "Sales" },
+  { value: "marketing", name: "Marketing" },
+  { value: "engineering", name: "Engineering" },
+  { value: "human_resources", name: "Human Resources" },
+  { value: "legal", name: "Legal" },
+];
