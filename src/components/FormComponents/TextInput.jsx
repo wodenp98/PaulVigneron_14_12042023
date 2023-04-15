@@ -10,7 +10,7 @@ const TextInput = ({
   placeholder,
 }) => {
   return (
-    <label htmlFor={htmlFor}>
+    <label htmlFor={htmlFor} className="block text-gray-700 font-bold mb-2">
       {label}
       <input
         id={id}
@@ -19,6 +19,7 @@ const TextInput = ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       />
     </label>
   );

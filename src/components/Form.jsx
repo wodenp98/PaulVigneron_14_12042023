@@ -52,7 +52,10 @@ const Form = () => {
   };
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-6 rounded-lg shadow-md"
+      >
         <TextInput
           htmlFor="firstName"
           id="firstName"
@@ -95,8 +98,8 @@ const Form = () => {
           dateFormat="dd/MM/yyyy"
         />
         <br />
-        <fieldset>
-          <legend>Address</legend>
+        <fieldset className="bg-gray-100 border border-gray-300 p-4">
+          <legend className="text-lg font-medium mb-2">Address</legend>
           <TextInput
             htmlFor="street"
             id="street"

@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <>
       <NavbarHome />
-      <div>
+      <div className="flex flex-col items-center">
         <h1>Create Employee</h1>
         <Form />
       </div>

@@ -13,7 +13,7 @@ const DateInput = ({
   dateFormat,
 }) => {
   return (
-    <label htmlFor={htmlFor}>
+    <label htmlFor={htmlFor} className="block text-gray-700 font-bold mb-2">
       {label}:
       <DatePicker
         id={id}
@@ -22,6 +22,7 @@ const DateInput = ({
         onChange={onChange}
         placeholderText={placeholder}
         dateFormat={dateFormat}
+        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
       />
     </label>
   );
