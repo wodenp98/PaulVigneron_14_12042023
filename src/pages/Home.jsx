@@ -6,8 +6,8 @@ const Home = () => {
   return (
     <>
       <NavbarHome />
-      <div className="flex flex-col items-center">
-        <h1>Create Employee</h1>
+      <div className="bg-gray-600 flex flex-col items-center">
+        <h1 className="text-white text-3xl font-bold my-4">Create Employee</h1>
         <Form />
       </div>
     </>

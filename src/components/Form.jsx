@@ -28,33 +28,20 @@ const Form = () => {
     setFormValues((prevValues) => ({ ...prevValues, [name]: date }));
   };
 
-  const handleSelectChange = (event) => {
-    const { name, value } = event.target;
-    setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
-  };
-
-  const handleSave = () => {
-    const isFormValid = Object.values(formValues).every((value) =>
-      Boolean(value.trim())
-    );
-    if (isFormValid) {
-      setModalIsOpen(true);
-    }
-  };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleSave();
+    console.log(formValues);
+    setModalIsOpen(!modalIsOpen);
   };
 
   const toggleModal = () => {
     setModalIsOpen(!modalIsOpen);
   };
   return (
-    <div>
+    <div className="max-w-lg min-h-screen mx-auto">
       <form
         onSubmit={handleSubmit}
-        className="bg-white p-6 rounded-lg shadow-md"
+        className="bg-white p-6 rounded-lg shadow-md my-8"
       >
         <TextInput
           htmlFor="firstName"
@@ -65,7 +52,7 @@ const Form = () => {
           value={formValues.firstname}
           onChange={handleChange}
         />
-        <br />
+
         <TextInput
           htmlFor="lastName"
           id="lastName"
@@ -75,7 +62,7 @@ const Form = () => {
           value={formValues.lastname}
           onChange={handleChange}
         />
-        <br />
+
         <DateInput
           htmlFor="birthDate"
           id="birthDate"
@@ -86,7 +73,7 @@ const Form = () => {
           onChange={(date) => handleDateChange(date, "birthDate")}
           dateFormat="dd/MM/yyyy"
         />
-        <br />
+
         <DateInput
           htmlFor="startDate"
           id="startDate"
@@ -97,8 +84,8 @@ const Form = () => {
           onChange={(date) => handleDateChange(date, "startDate")}
           dateFormat="dd/MM/yyyy"
         />
-        <br />
-        <fieldset className="bg-gray-100 border border-gray-300 p-4">
+
+        <fieldset className="bg-gray-100 border border-gray-300 p-4 rounded">
           <legend className="text-lg font-medium mb-2">Address</legend>
           <TextInput
             htmlFor="street"
@@ -109,7 +96,7 @@ const Form = () => {
             value={formValues.street}
             onChange={handleChange}
           />
-          <br />
+
           <TextInput
             htmlFor="city"
             id="city"
@@ -119,7 +106,7 @@ const Form = () => {
             value={formValues.city}
             onChange={handleChange}
           />
-          <br />
+
           <SelectInput
             htmlFor="state"
             id="state"
@@ -127,9 +114,9 @@ const Form = () => {
             name="state"
             value={formValues.state}
             options={states}
-            onChange={handleSelectChange}
+            onChange={handleChange}
           />
-          <br />
+
           <TextInput
             htmlFor="zipcode"
             id="zipcode"
@@ -139,7 +126,6 @@ const Form = () => {
             value={formValues.zipcode}
             onChange={handleChange}
           />
-          <br />
         </fieldset>
         <SelectInput
           htmlFor="departments"
@@ -148,13 +134,18 @@ const Form = () => {
           name="departments"
           value={formValues.departments}
           options={departments}
-          onChange={handleSelectChange}
+          onChange={handleChange}
         />
-        <button type="submit">Save</button>
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Save
+        </button>
 
         {modalIsOpen && (
           <Modal toggle={toggleModal}>
-            <h1>Employee Created!</h1>
+            <h1 className="font-bold text-center text-lg">Employee Created!</h1>
           </Modal>
         )}
       </form>
