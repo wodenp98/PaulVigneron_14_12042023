@@ -1,8 +1,20 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useCallback } from "react";
 import { useTable } from "react-table";
+import { FaTrash } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { removeEmployee } from "../features/slice";
 
-const Table = () => {
-  const data = useMemo(() => [], []);
+function Table() {
+  const dispatch = useDispatch();
+  const employees = useSelector((state) => state.employees.data);
+
+  const handleDelete = useCallback(
+    (id) => {
+      dispatch(removeEmployee(id));
+    },
+    [dispatch]
+  );
+
   const columns = useMemo(
     () => [
       {
@@ -41,48 +53,57 @@ const Table = () => {
         Header: "Zip Code",
         accessor: "zipCode",
       },
+      {
+        Header: "Delete",
+        Cell: ({ row }) => (
+          <button onClick={() => handleDelete(row.original)}>
+            <FaTrash />
+          </button>
+        ),
+      },
     ],
-    []
+    [handleDelete]
   );
+
+  const data = useMemo(() => employees, [employees]);
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data });
+    useTable({
+      columns,
+      data,
+    });
 
   return (
-    <div>
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.length === 0 ? (
-            <tr>
-              <td colSpan={headerGroups[0].headers.length}>
-                No data available
-              </td>
-            </tr>
-          ) : (
-            rows.map((row) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => (
-                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                  ))}
-                </tr>
-              );
-            })
-          )}
-        </tbody>
-      </table>
-    </div>
+    <table {...getTableProps()}>
+      <thead>
+        {headerGroups.map((headerGroup) => (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+            {headerGroup.headers.map((column) => (
+              <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+            ))}
+          </tr>
+        ))}
+      </thead>
+      <tbody {...getTableBodyProps()}>
+        {rows.length === 0 ? (
+          <tr>
+            <td colSpan={headerGroups[0].headers.length}>No data available</td>
+          </tr>
+        ) : (
+          rows.map((row) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map((cell) => (
+                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                ))}
+              </tr>
+            );
+          })
+        )}
+      </tbody>
+    </table>
   );
-};
+}
 
 export default Table;
