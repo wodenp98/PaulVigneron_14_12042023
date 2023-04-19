@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 
-export default function EmployeeForm() {
+const Form = () => {
   const {
     register,
     handleSubmit,
@@ -247,4 +247,6 @@ export default function EmployeeForm() {
       )}
     </div>
   );
-}
+};
+
+export default Form;

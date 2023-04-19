@@ -4,7 +4,7 @@ import { FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { removeEmployee } from "../features/slice";
 
-function Table() {
+const Table = () => {
   const dispatch = useDispatch();
   const employees = useSelector((state) => state.employees.data);
 
@@ -104,6 +104,6 @@ function Table() {
       </tbody>
     </table>
   );
-}
+};
 
 export default Table;
