@@ -5,20 +5,30 @@ import { useForm } from "react-hook-form";
 import TextInput from "./FormComponents/TextInput";
 import DateInput from "./FormComponents/DateInput";
 import SelectInput from "./FormComponents/SelectInput";
+import { addEmployee } from "../features/slice";
+import { useDispatch } from "react-redux";
+import { format } from "date-fns";
 
 const Form = () => {
   const {
     register,
     handleSubmit,
-    // setValue,
     control,
     formState: { errors },
   } = useForm();
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const onSubmit = (data) => {
     console.log(data);
-    // setValue()
+
+    const formattedDate = {
+      ...data,
+      birthDate: format(data.birthDate, "dd-MM-yyyy"),
+      startDate: format(data.startDate, "dd-MM-yyyy"),
+    };
+    console.log(formattedDate);
+    dispatch(addEmployee(formattedDate));
     setModalIsOpen(true);
   };
 

@@ -1,16 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  employees: [],
+};
+
 const employeesSlice = createSlice({
   name: "employees",
-  initialState: {
-    data: [],
-  },
+  initialState,
   reducers: {
     addEmployee: (state, action) => {
-      state.data.push(action.payload);
+      state.employees.push(action.payload);
     },
     removeEmployee: (state, action) => {
-      state.data = state.data.filter(
+      state.employees = state.employees.filter(
         (employee) => employee.id !== action.payload
       );
     },

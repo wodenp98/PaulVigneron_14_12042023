@@ -6,7 +6,7 @@ import { removeEmployee } from "../features/slice";
 
 const Table = () => {
   const dispatch = useDispatch();
-  const employees = useSelector((state) => state.employees.data);
+  const employees = useSelector((state) => state.employees.employees);
 
   const handleDelete = useCallback(
     (id) => {
@@ -35,7 +35,7 @@ const Table = () => {
       },
       {
         Header: "Date of Birth",
-        accessor: "dateOfBirth",
+        accessor: "birthDate",
       },
       {
         Header: "Street",
@@ -51,7 +51,7 @@ const Table = () => {
       },
       {
         Header: "Zip Code",
-        accessor: "zipCode",
+        accessor: "zipcode",
       },
       {
         Header: "Delete",
