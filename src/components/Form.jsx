@@ -20,16 +20,17 @@ const Form = () => {
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    console.log(data);
-
     const formattedDate = {
       ...data,
       birthDate: format(data.birthDate, "dd-MM-yyyy"),
       startDate: format(data.startDate, "dd-MM-yyyy"),
+      id: Date.now(),
     };
+
     console.log(formattedDate);
     dispatch(addEmployee(formattedDate));
     setModalIsOpen(true);
+    // clear les champs?
   };
 
   const toggleModal = () => {

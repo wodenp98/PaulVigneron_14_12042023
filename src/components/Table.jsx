@@ -7,10 +7,11 @@ import { removeEmployee } from "../features/slice";
 const Table = () => {
   const dispatch = useDispatch();
   const employees = useSelector((state) => state.employees.employees);
+  console.log(employees);
 
   const handleDelete = useCallback(
-    (id) => {
-      dispatch(removeEmployee(id));
+    (row) => {
+      dispatch(removeEmployee(row));
     },
     [dispatch]
   );
@@ -56,7 +57,7 @@ const Table = () => {
       {
         Header: "Delete",
         Cell: ({ row }) => (
-          <button onClick={() => handleDelete(row.original)}>
+          <button onClick={() => handleDelete(row.original.id)}>
             <FaTrash />
           </button>
         ),
