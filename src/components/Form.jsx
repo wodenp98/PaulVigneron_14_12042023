@@ -24,7 +24,6 @@ const Form = () => {
       ...data,
       birthDate: format(data.birthDate, "dd-MM-yyyy"),
       startDate: format(data.startDate, "dd-MM-yyyy"),
-      id: Date.now(),
     };
 
     console.log(formattedDate);

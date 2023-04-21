@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useEffect } from "react";
+import React, { useMemo, useEffect } from "react";
 import { useTable } from "react-table";
 import { FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,14 +12,10 @@ const Table = () => {
     dispatch(fetchEmployees());
   }, [dispatch]);
 
-  const handleDelete = useCallback(
-    (row) => {
-      console.log(row);
-      dispatch(deleteEmployee(row));
-    },
-    [dispatch]
-  );
-
+  const handleDelete = (row) => {
+    const employee = row.original;
+    dispatch(deleteEmployee(employee));
+  };
   const columns = useMemo(
     () => [
       {
@@ -58,16 +54,8 @@ const Table = () => {
         Header: "Zip Code",
         accessor: "zipcode",
       },
-      {
-        Header: "Delete",
-        Cell: ({ row }) => (
-          <button onClick={() => handleDelete(row.original.id)}>
-            <FaTrash />
-          </button>
-        ),
-      },
     ],
-    [handleDelete]
+    []
   );
 
   const data = useMemo(() => employees, [employees]);
@@ -86,6 +74,7 @@ const Table = () => {
             {headerGroup.headers.map((column) => (
               <th {...column.getHeaderProps()}>{column.render("Header")}</th>
             ))}
+            <th>Delete</th>
           </tr>
         ))}
       </thead>
@@ -102,6 +91,11 @@ const Table = () => {
                 {row.cells.map((cell) => (
                   <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                 ))}
+                <td>
+                  <button onClick={() => handleDelete(row)}>
+                    <FaTrash />
+                  </button>
+                </td>
               </tr>
             );
           })

@@ -3,16 +3,10 @@ import { db } from "../firebase.config";
 import { remove, ref, push, get } from "firebase/database";
 
 export const addEmployee = createAsyncThunk(
-  "employee/addEmployee",
-  async (employeeData) => {
-    try {
-      const employeeRef = await push(ref(db, "employees"), employeeData);
-      const employeeKey = employeeRef.key;
-      return { ...employeeData, id: employeeKey };
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
+  "employees/addEmployee",
+  async (employee) => {
+    const employeeRef = await push(ref(db, "employees"), employee);
+    return { ...employee, id: employeeRef.key };
   }
 );
 
@@ -31,15 +25,13 @@ export const fetchEmployees = createAsyncThunk(
 
 export const deleteEmployee = createAsyncThunk(
   "employees/deleteEmployee",
-  async (employeeId) => {
+  async (employee) => {
     try {
-      console.log(employeeId);
-      const employeeRef = db.ref(`employees/${employeeId}`);
-      await employeeRef.remove();
-      return employeeId;
+      const employeeRef = ref(db, `employees/${employee.id}`);
+      await remove(employeeRef);
+      return employee.id;
     } catch (error) {
-      console.error("Error deleting employee:", error);
-      throw error;
+      return error;
     }
   }
 );
