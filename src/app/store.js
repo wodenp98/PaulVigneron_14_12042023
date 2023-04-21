@@ -1,8 +1,12 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import employeesReducer from "../features/slice";
+import thunkMiddleware from "redux-thunk";
 
-export default configureStore({
+const store = configureStore({
   reducer: {
     employees: employeesReducer,
   },
+  middleware: [...getDefaultMiddleware(), thunkMiddleware],
 });
+
+export default store;

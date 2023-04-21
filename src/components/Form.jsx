@@ -5,9 +5,9 @@ import { useForm } from "react-hook-form";
 import TextInput from "./FormComponents/TextInput";
 import DateInput from "./FormComponents/DateInput";
 import SelectInput from "./FormComponents/SelectInput";
-import { addEmployee } from "../features/slice";
 import { useDispatch } from "react-redux";
 import { format } from "date-fns";
+import { addEmployee } from "../features/thunk";
 
 const Form = () => {
   const {

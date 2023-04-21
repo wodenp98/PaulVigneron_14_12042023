@@ -1,17 +1,21 @@
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, useEffect } from "react";
 import { useTable } from "react-table";
 import { FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { removeEmployee } from "../features/slice";
+import { deleteEmployee, fetchEmployees } from "../features/thunk";
 
 const Table = () => {
   const dispatch = useDispatch();
   const employees = useSelector((state) => state.employees.employees);
-  console.log(employees);
+
+  useEffect(() => {
+    dispatch(fetchEmployees());
+  }, [dispatch]);
 
   const handleDelete = useCallback(
     (row) => {
-      dispatch(removeEmployee(row));
+      console.log(row);
+      dispatch(deleteEmployee(row));
     },
     [dispatch]
   );
