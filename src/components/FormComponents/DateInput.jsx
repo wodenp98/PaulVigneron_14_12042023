@@ -2,6 +2,7 @@ import React from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Controller } from "react-hook-form";
+import { format, parse } from "date-fns";
 
 const DateInput = ({ name, label, control, errors }) => {
   return (
@@ -19,8 +20,12 @@ const DateInput = ({ name, label, control, errors }) => {
               id={name}
               name={name}
               placeholderText="Select a date"
-              onChange={(e) => field.onChange(e)}
-              selected={field.value}
+              onChange={(date) => field.onChange(format(date, "dd/MM/yyyy"))}
+              selected={
+                field.value
+                  ? parse(field.value, "dd/MM/yyyy", new Date())
+                  : null
+              }
               peekNextMonth
               dateFormat="dd/MM/yyyy"
               showMonthDropdown
@@ -30,9 +35,7 @@ const DateInput = ({ name, label, control, errors }) => {
                 errors[name] ? "border-red-500" : ""
               }`}
             />
-            {errors[name] && (
-              <p className="text-red-500 mb-2">{label} is required</p>
-            )}
+            {errors[name] && <p className="text-red-500 mb-2">{label}</p>}
           </div>
         )}
       />

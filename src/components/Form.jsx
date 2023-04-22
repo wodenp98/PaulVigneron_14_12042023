@@ -6,7 +6,7 @@ import TextInput from "./FormComponents/TextInput";
 import DateInput from "./FormComponents/DateInput";
 import SelectInput from "./FormComponents/SelectInput";
 import { useDispatch } from "react-redux";
-import { format } from "date-fns";
+import { format, parse, differenceInYears } from "date-fns";
 import { addEmployee } from "../features/thunk";
 
 const Form = () => {
@@ -14,22 +14,38 @@ const Form = () => {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      birthDate: null,
+      startDate: null,
+    },
+    mode: "onChange",
+  });
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    const formattedDate = {
-      ...data,
-      birthDate: format(data.birthDate, "dd-MM-yyyy"),
-      startDate: format(data.startDate, "dd-MM-yyyy"),
-    };
+    const dateOfBirth = parse(data.birthDate, "dd/MM/yyyy", new Date());
+    const dateOfJoining = parse(data.startDate, "dd/MM/yyyy", new Date());
 
-    console.log(formattedDate);
-    dispatch(addEmployee(formattedDate));
-    setModalIsOpen(true);
-    // clear les champs?
+    const age = differenceInYears(dateOfJoining, dateOfBirth);
+    console.log(age);
+
+    if (age < 18) {
+      alert("L'employé doit avoir au moins 18 ans pour rejoindre l'entreprise");
+      return;
+    } else {
+      const formattedDate = {
+        ...data,
+        birthDate: format(dateOfBirth, "dd-MM-yyyy"),
+        startDate: format(dateOfJoining, "dd-MM-yyyy"),
+      };
+      dispatch(addEmployee(formattedDate));
+      setModalIsOpen(true);
+      reset();
+    }
   };
 
   const toggleModal = () => {

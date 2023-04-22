@@ -57,7 +57,7 @@ const Table = () => {
     ],
     []
   );
-
+  // styliser table + tri + firebase
   const data = useMemo(() => employees, [employees]);
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
@@ -74,7 +74,7 @@ const Table = () => {
             {headerGroup.headers.map((column) => (
               <th {...column.getHeaderProps()}>{column.render("Header")}</th>
             ))}
-            <th>Delete</th>
+            <th></th>
           </tr>
         ))}
       </thead>
