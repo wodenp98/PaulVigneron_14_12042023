@@ -31,7 +31,6 @@ const Form = () => {
     const dateOfJoining = parse(data.startDate, "dd/MM/yyyy", new Date());
 
     const age = differenceInYears(dateOfJoining, dateOfBirth);
-    console.log(age);
 
     if (age < 18) {
       alert("L'employé doit avoir au moins 18 ans pour rejoindre l'entreprise");
