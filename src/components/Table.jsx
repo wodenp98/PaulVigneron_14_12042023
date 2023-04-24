@@ -57,7 +57,7 @@ const Table = () => {
     ],
     []
   );
-  // styliser table + tri + firebase
+
   const data = useMemo(() => employees, [employees]);
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
