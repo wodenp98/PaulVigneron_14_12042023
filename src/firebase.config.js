@@ -15,7 +15,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-// Obtenez une référence à la base de données Firebase
 const db = getDatabase(app);
 
 export { db };
