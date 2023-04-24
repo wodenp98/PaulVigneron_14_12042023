@@ -1,21 +1,21 @@
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useEffect } from "react";
 import { useTable } from "react-table";
 import { FaTrash } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import { removeEmployee } from "../features/slice";
+import { deleteEmployee, fetchEmployees } from "../features/thunk";
 
 const Table = () => {
   const dispatch = useDispatch();
   const employees = useSelector((state) => state.employees.employees);
-  console.log(employees);
 
-  const handleDelete = useCallback(
-    (row) => {
-      dispatch(removeEmployee(row));
-    },
-    [dispatch]
-  );
+  useEffect(() => {
+    dispatch(fetchEmployees());
+  }, [dispatch]);
 
+  const handleDelete = (row) => {
+    const employee = row.original;
+    dispatch(deleteEmployee(employee));
+  };
   const columns = useMemo(
     () => [
       {
@@ -54,18 +54,10 @@ const Table = () => {
         Header: "Zip Code",
         accessor: "zipcode",
       },
-      {
-        Header: "Delete",
-        Cell: ({ row }) => (
-          <button onClick={() => handleDelete(row.original.id)}>
-            <FaTrash />
-          </button>
-        ),
-      },
     ],
-    [handleDelete]
+    []
   );
-
+  // styliser table + tri + firebase
   const data = useMemo(() => employees, [employees]);
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
@@ -82,6 +74,7 @@ const Table = () => {
             {headerGroup.headers.map((column) => (
               <th {...column.getHeaderProps()}>{column.render("Header")}</th>
             ))}
+            <th></th>
           </tr>
         ))}
       </thead>
@@ -98,6 +91,11 @@ const Table = () => {
                 {row.cells.map((cell) => (
                   <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                 ))}
+                <td>
+                  <button onClick={() => handleDelete(row)}>
+                    <FaTrash />
+                  </button>
+                </td>
               </tr>
             );
           })
