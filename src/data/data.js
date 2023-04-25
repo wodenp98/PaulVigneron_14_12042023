@@ -238,9 +238,9 @@ export const states = [
 ];
 
 export const departments = [
-  { value: "sales", name: "Sales" },
-  { value: "marketing", name: "Marketing" },
-  { value: "engineering", name: "Engineering" },
-  { value: "human_resources", name: "Human Resources" },
-  { value: "legal", name: "Legal" },
+  { value: "Sales", name: "Sales" },
+  { value: "Marketing", name: "Marketing" },
+  { value: "Engineering", name: "Engineering" },
+  { value: "Human resources", name: "Human Resources" },
+  { value: "Legal", name: "Legal" },
 ];

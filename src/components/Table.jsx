@@ -54,6 +54,12 @@ const Table = () => {
         Header: "Zip Code",
         accessor: "zipcode",
       },
+      {
+        Header: "",
+        accessor: "",
+        id: "hiddenColumn",
+        hidden: true,
+      },
     ],
     []
   );
@@ -70,10 +76,10 @@ const Table = () => {
     );
 
   return (
-    <div class="overflow-x-auto h-full">
+    <div className="overflow-x-auto h-full">
       <table
         {...getTableProps()}
-        class="table-auto w-full border-collapse sm:table-responsive"
+        className="table-auto w-full border-collapse sm:table-responsive"
       >
         <thead className="bg-gray-200">
           {headerGroups.map((headerGroup) => (
@@ -81,7 +87,7 @@ const Table = () => {
               {headerGroup.headers.map((column) => (
                 <th
                   {...column.getHeaderProps(column.getSortByToggleProps())}
-                  className="px-4 py-2 font-bold text-left"
+                  className="px-4 py-2 font-bold text-left cursor-pointer"
                 >
                   {column.render("Header")}
                   <span className="ml-1">
@@ -97,11 +103,13 @@ const Table = () => {
             </tr>
           ))}
         </thead>
-
         <tbody {...getTableBodyProps()} className="bg-white">
           {rows.length === 0 ? (
             <tr>
-              <td colSpan={headerGroups[0].headers.length}>
+              <td
+                colSpan={headerGroups[0].headers.length + 1}
+                className="text-center"
+              >
                 No data available
               </td>
             </tr>
@@ -118,7 +126,7 @@ const Table = () => {
                       {...cell.getCellProps()}
                       className={`px-4 py-2 ${
                         cellIndex === 0 ? "font-bold" : ""
-                      }`}
+                      } sm:text-sm`}
                     >
                       {cell.render("Cell")}
                     </td>
@@ -126,7 +134,9 @@ const Table = () => {
                   <td className="px-4 py-2">
                     <button
                       onClick={() => handleDelete(row)}
-                      className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                      id="delete-employee"
+                      aria-label="Delete an employee"
+                      className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded sm:text-sm"
                     >
                       <FaTrash />
                     </button>

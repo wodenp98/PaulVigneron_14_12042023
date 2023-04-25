@@ -1,13 +1,13 @@
 import Modal from "@wodenp98/plugin-modal-react";
-import { states, departments } from "../data/data";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import TextInput from "./FormComponents/TextInput";
-import DateInput from "./FormComponents/DateInput";
-import SelectInput from "./FormComponents/SelectInput";
 import { useDispatch } from "react-redux";
 import { format, parse, differenceInYears } from "date-fns";
 import { addEmployee } from "../features/thunk";
+import { states, departments } from "../data/data";
+import TextInput from "./FormComponents/TextInput";
+import DateInput from "./FormComponents/DateInput";
+import SelectInput from "./FormComponents/SelectInput";
 
 const Form = () => {
   const {
@@ -142,7 +142,7 @@ const Form = () => {
 
         <button
           type="submit"
-          className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded mt-4"
+          className="bg-indigo-800 hover:bg-indigo-900 text-white font-bold py-2 px-4 rounded mt-4"
         >
           Save
         </button>

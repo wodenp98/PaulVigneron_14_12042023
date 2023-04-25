@@ -20,7 +20,9 @@ const DateInput = ({ name, label, control, errors }) => {
               id={name}
               name={name}
               placeholderText="Select a date"
-              onChange={(date) => field.onChange(format(date, "dd/MM/yyyy"))}
+              onChange={(date) =>
+                field.onChange(date ? format(date, "dd/MM/yyyy") : null)
+              }
               selected={
                 field.value
                   ? parse(field.value, "dd/MM/yyyy", new Date())
