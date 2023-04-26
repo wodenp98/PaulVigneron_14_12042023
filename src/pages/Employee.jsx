@@ -1,6 +1,6 @@
 import React from "react";
-import NavbarEmployee from "../components/NavbarEmployee";
-import Table from "../components/Table";
+import NavbarEmployee from "../components/NavbarEmployee.jsx";
+import Table from "../components/Table.jsx";
 
 const Employee = () => {
   return (

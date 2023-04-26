@@ -5,9 +5,9 @@ import { useDispatch } from "react-redux";
 import { format, parse, differenceInYears } from "date-fns";
 import { addEmployee } from "../features/thunk";
 import { states, departments } from "../data/data";
-import TextInput from "./FormComponents/TextInput";
-import DateInput from "./FormComponents/DateInput";
-import SelectInput from "./FormComponents/SelectInput";
+import TextInput from "./FormComponents/TextInput.jsx";
+import DateInput from "./FormComponents/DateInput.jsx";
+import SelectInput from "./FormComponents/SelectInput.jsx";
 
 const Form = () => {
   const {

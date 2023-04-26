@@ -1,6 +1,6 @@
 import React from "react";
-import NavbarHome from "../components/NavbarHome";
-import Form from "../components/Form";
+import NavbarHome from "../components/NavbarHome.jsx";
+import Form from "../components/Form.jsx";
 
 const Home = () => {
   return (
