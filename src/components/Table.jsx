@@ -76,7 +76,7 @@ const Table = () => {
     );
 
   return (
-    <div className="overflow-x-auto  w-full h-full flex-col sm:flex-row ">
+    <div className="overflow-x-auto  w-4/5 h-full rounded">
       <div className="sm:overflow-x-auto">
         <table
           {...getTableProps()}
@@ -121,10 +121,7 @@ const Table = () => {
               rows.map((row, rowIndex) => {
                 prepareRow(row);
                 return (
-                  <tr
-                    {...row.getRowProps()}
-                    className={rowIndex % 2 === 0 ? "bg-gray-100" : ""}
-                  >
+                  <tr {...row.getRowProps()} className="bg-gray-100">
                     {row.cells.map((cell, cellIndex) => (
                       <td
                         {...cell.getCellProps()}
